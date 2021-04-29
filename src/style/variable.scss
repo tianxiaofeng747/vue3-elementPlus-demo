@@ -1,0 +1,45 @@
+/**scss 变量**/
+
+// public
+$body-bg: #fff;
+$theam:#0e8dcb;
+$border-color:#d1dbe5;
+//header
+$header-height:50px;
+$header-active-color:#057cb9;
+// menu
+$menu-bg:#fff;
+$menu-bg-hover:#0e8dcb;
+$menu-right-line:#d1dbe5;
+$menu-width:102px;
+$menu-close-width:50px;
+$menu-li-height:60px;
+// left menu
+$left-width:102px;
+$left-bg:#fff;
+// content
+$content-bg:#fff;
+// footer
+$footer-height:50px;
+$footer-bg:#fff;
+// margin
+$mg-min-size:5;
+// padding
+$pd-min-size:5;
+// width
+$width-min-size:100;
+// color
+$text-link-color: #0e8dcb;
+$text-success-color: #3aa13e;
+$text-warning-color:#e6a23c;
+$text-danger-color:#cc0000;
+$text-gray-color:gray;
+$tag-gray-color:gray;
+$tag-danger-color:#ef4040;
+$tag-warning-color:#e6a23c;
+$tag-success-color:#3aa13e;
+$row-error-color: #ffd0d0;
+// other
+$input-type:button submit search reset; //type 类型
+$info:(success:#3aa13e, info:#0e8dcb, warning:#ff8800, gray:#8492A6, danger: #ff5252); //颜色信息
+
