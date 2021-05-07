@@ -2,11 +2,15 @@
  * @Author: jinqing
  * @Date: 2021-04-28 10:48:41
  * @LastEditors: jinqing
- * @LastEditTime: 2021-04-29 16:50:13
+ * @LastEditTime: 2021-05-07 11:00:25
  * @Description: file content
 -->
 <template>
-    <yl-table :data="list">
+    <yl-table :data="list" @selection-change="handleSelectionChange">
+        <el-table-column
+            type="selection"
+            width="55">
+            </el-table-column>
         <el-table-column prop="indexX" label="序号"></el-table-column>
         <el-table-column prop="sourceFuncName" label="来源单据" show-overflow-tooltip>
             <template #default="scope">
@@ -41,8 +45,12 @@ export default defineComponent({
         const renderXhao = () =>{
             return '<div>xh</div>'
         }
+        const handleSelectionChange = (vals) =>{
+            console.log(vals)
+        }
         return {
-            renderXhao
+            renderXhao,
+            handleSelectionChange
         }
     },
 });

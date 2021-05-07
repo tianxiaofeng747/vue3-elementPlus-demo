@@ -175,10 +175,7 @@ export default defineComponent({
                     // label 是显示名， 可能被修改过，所以又定义了个name，默认等于label
                     if (subItem.prop) {
                         let colId = subItem.prop + (subItem.name || subItem.label);
-                        return colId === propsData.prop + propsData.label;
-                    }
-                    if (subItem.type) {
-                        return subItem.type === propsData.type;
+                        return colId === propsData.prop + (propsData.name || propsData.label);
                     }
                 }
                 );
@@ -186,9 +183,8 @@ export default defineComponent({
                 if (propsData['show-overflow-tooltip'] === undefined) {
                     propsData['show-overflow-tooltip'] = true;
                 }
-
                 if (temp && !temp.isHide) {
-                    Object.assign(propsData, temp);
+                    Object.assign(item.props, temp);
                     item.tempSort = temp.tempSort;
                     arr.push(item);
                 }
@@ -252,7 +248,6 @@ export default defineComponent({
         };
         const init = () => {
             sourceSlots = (slots.default() || []);
-            console.log(sourceSlots);
             formatProps().then(_ => {
                 if (prop.enableConfig) {
                     renderConfigIcon();
@@ -261,12 +256,6 @@ export default defineComponent({
             });
         };
         init();
-        const listeners = {
-            on: {
-                'header-dragend': headerDragend
-            }
-        };
-        
         // {this.isShowOpt ? (
         //     <div class="yl-table-opt" style={this.optStyle} on-mouseover={this.handleMouseEnterOpt}>
         //         {this.renderOpt()}
@@ -282,8 +271,10 @@ export default defineComponent({
                                 border
                                 size="small"
                                 ref="my-table"
-                                {...{ attrs: attrs }}
-                                {...listeners}
+                                {
+                                    ...attrs
+                                }
+                                onHeaderDragend={headerDragend}
                             >
                                 {sSolts}
                             </el-table>

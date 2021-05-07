@@ -165,6 +165,9 @@ export default defineComponent({
                 } else {
                     item.fixed = false;
                 }
+                if(!item.width){
+                    item.width = undefined;
+                }
             });
             let config = this.columns
                 .filter(item => item.unSet)
