@@ -2,8 +2,8 @@
  * @Author: jinqing
  * @Date: 2021-04-23 10:41:01
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-25 14:51:09
- * @Description: file content
+ * @LastEditTime: 2021-05-25 15:24:09
+ * @Description: 入口文件
  */
 import { createApp } from 'vue';
 import App from './App.vue';
@@ -28,12 +28,11 @@ MyApp.use(Store);
 // MyApp.use(YcloudUi);
 
 Object.keys(modules).forEach(fileName => {
-    // 获取组件配置
     const componentConfig = defineAsyncComponent(modules[fileName]);
     const filterName = /^\.\/pages(.*)\/index\.vue/g.exec(fileName)[1];
     const componentName = Tools.reverseComponentName(filterName);
-    console.log(componentName);
-    // componentConfig
+    // 这一句话很重要， keep-alive include 数组里面是 组件的名字， 所以这里注册组件的时候，给异步组件名赋值。
+    componentConfig.name = componentName;
     // 全局注册组件
     MyApp.component(
         componentName, componentConfig

@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-05-11 15:16:39
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-25 15:03:27
+ * @LastEditTime: 2021-05-25 15:21:02
  * @Description: file content
 -->
 <template>
@@ -69,7 +69,6 @@ export default defineComponent({
             let list = store.getters.cachedViews;
             list = list.map(item => item.replace(/\d/g,''));
             cachedTabs.value = list;
-            console.log(list);
         };
         const updateComponent = () => {
             let comPath = Tools.reverseComponentName(route.meta.componentUrl);
