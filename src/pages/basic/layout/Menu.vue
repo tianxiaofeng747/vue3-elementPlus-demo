@@ -11,6 +11,7 @@
             </div>
         </div>
         <div class="menu-content" :class="currMenuType === 'all' ? 'menu-content-all' : 'menu-content-common'" ref="menuContent">
+            {{leftMenu.length}}
             <el-scrollbar wrap-class="scrollbar-wrapper" :style="{ height: menuMaxHeight }">
                 <ul class="menu-all">
                     <template v-for="(item, index) in leftMenu">
@@ -192,11 +193,9 @@ export default {
             return obj;
         },
         gotoUrl(item) {
-            console.log(this.$router.hasRoute('/1390593379673260034'));
-            this.$router.push(item.path);
-            // this.$router.push({
-            //     name: item.name
-            // });
+            this.$router.push({
+                name: item.name
+            });
         },
         // 搜索菜单
         handleSearch() {

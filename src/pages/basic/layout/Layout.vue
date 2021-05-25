@@ -1,14 +1,13 @@
 <template>
     <div class="app-wrapper" :class="{ closeSidebar: !isOpean, hideSidebar: isHide }">
         <div class="content">
-            <level-header v-show="!isFullScreen"></level-header>
+            <level-header ></level-header>
             <div class="section">
-                <Menu class="sidebar-container menu" v-show="!isFullScreen" :hideSidebar="isHide"></Menu>
+                <Menu class="sidebar-container menu" :hideSidebar="isHide"></Menu>
                 <div class="collapse">
-                    <!-- <div class="collapse" v-show="!isFullScreen"> -->
                     <img class="pointer" :src="isHide ? CloseImg : OpenImg" alt="" @click="isHide = !isHide" />
                 </div>
-                <div class="content" :class="{ close: !isOpean, fullScreen: isFullScreen }">
+                <div class="content" :class="{ close: !isOpean}">
                     <div class="main-container" ref="mainContainer">
                         <div class="main-nav">
                             <!-- <TabsNav></TabsNav> -->

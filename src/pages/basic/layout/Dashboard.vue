@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-05-11 15:16:39
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-25 10:12:27
+ * @LastEditTime: 2021-05-25 10:18:45
  * @Description: file content
 -->
 <template>
@@ -17,7 +17,7 @@ import Error from '@/components/error/index.vue';
 import Nav from '@/components/navPage/index.vue';
 import { defineComponent, resolveDynamicComponent, watch,ref} from 'vue';
 import {useRoute} from 'vue-router';
-import { mapGetters } from 'vuex';
+import { mapGetters, useStore } from 'vuex';
 //const modules = import.meta.glob('../../**/index.vue');
 
 let reverseComponentName = (str) => str.replace(/(\/|\.)/g, '');
@@ -29,22 +29,11 @@ export default defineComponent({
         };
     },
     computed: {
-        ...mapGetters(['buttons']),
         cachedViews () {
             return this.$store.state.app.cachedViews;
         }
     },
-    watch: {
-        
-    },
     methods: {
-        _getBtnAuth (no, permissions) {
-            this.buttons && this.buttons.forEach(item => {
-                if (item.parentFuncNo === no) {
-                    permissions[item.funcCode] = item.funcName;
-                }
-            });
-        },
         // 初始化按钮权限
         async initPermission () {
             let no = this.$route.meta.no || this.$route.query.$no,
@@ -62,8 +51,17 @@ export default defineComponent({
         }
     },
     setup(){
-        let route = useRoute();
+        let route = useRoute(),
+            store = useStore(),
+            permissions = {};
         let componentName = ref();
+        const _getBtnAuth = (no) => {
+            store.getters.buttons && store.getters.buttons.forEach(item => {
+                if (item.parentFuncNo === no) {
+                    permissions[item.funcCode] = item.funcName;
+                }
+            });
+        };
         const updateComponent = () => {
             let path = route.meta.componentUrl;
             let comPath = /^\//.test(path) ? path : ('/' + path);

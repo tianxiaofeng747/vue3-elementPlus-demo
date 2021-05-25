@@ -242,10 +242,10 @@ export default {
             this.isUserMsg = true;
         },
         setCurrentMenu() {
-            let currentItem = this.menuList.find(
-                item => ~this.$route.path.indexOf(item.funcUrl)
-            );
-            this.handleChangeMenu(currentItem || this.menuList[0]);
+            // let currentItem = this.menuList.find(
+            //     item => ~this.$route.path.indexOf(item.funcUrl)
+            // );
+            // this.handleChangeMenu(currentItem || this.menuList[0]);
         },
         countMoveLength() {
             this.moveNum = 0;
