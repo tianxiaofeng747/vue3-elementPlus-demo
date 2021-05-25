@@ -11,7 +11,6 @@
             </div>
         </div>
         <div class="menu-content" :class="currMenuType === 'all' ? 'menu-content-all' : 'menu-content-common'" ref="menuContent">
-            {{leftMenu.length}}
             <el-scrollbar wrap-class="scrollbar-wrapper" :style="{ height: menuMaxHeight }">
                 <ul class="menu-all">
                     <template v-for="(item, index) in leftMenu">

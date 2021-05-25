@@ -2,12 +2,12 @@
  * @Author: jinqing
  * @Date: 2021-05-11 15:16:39
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-25 10:18:45
+ * @LastEditTime: 2021-05-25 15:03:27
  * @Description: file content
 -->
 <template>
     <section class="app-main">
-        <keep-alive :include="cachedViews" :max="10">
+        <keep-alive :include="cachedTabs" :max="10">
             <component :is="componentName" ></component>    
         </keep-alive>
     </section>
@@ -18,9 +18,9 @@ import Nav from '@/components/navPage/index.vue';
 import { defineComponent, resolveDynamicComponent, watch,ref} from 'vue';
 import {useRoute} from 'vue-router';
 import { mapGetters, useStore } from 'vuex';
+import Tools from '@/utils/customer/global.js';
 //const modules = import.meta.glob('../../**/index.vue');
 
-let reverseComponentName = (str) => str.replace(/(\/|\.)/g, '');
 export default defineComponent({
     inject: ['$app'],
     data () {
@@ -28,11 +28,12 @@ export default defineComponent({
             permissions: null
         };
     },
-    computed: {
-        cachedViews () {
-            return this.$store.state.app.cachedViews;
-        }
-    },
+    // computed: {
+    //     cachedViews () {
+    //         console.log(this.$store.state.app.cachedViews)
+    //         return this.$store.state.app.cachedViews;
+    //     }
+    // },
     methods: {
         // 初始化按钮权限
         async initPermission () {
@@ -54,7 +55,8 @@ export default defineComponent({
         let route = useRoute(),
             store = useStore(),
             permissions = {};
-        let componentName = ref();
+        let componentName = ref(),
+            cachedTabs = ref([]);
         const _getBtnAuth = (no) => {
             store.getters.buttons && store.getters.buttons.forEach(item => {
                 if (item.parentFuncNo === no) {
@@ -62,20 +64,31 @@ export default defineComponent({
                 }
             });
         };
+        //设置缓存tab
+        const getCacheView = () => {
+            let list = store.getters.cachedViews;
+            list = list.map(item => item.replace(/\d/g,''));
+            cachedTabs.value = list;
+            console.log(list);
+        };
         const updateComponent = () => {
-            let path = route.meta.componentUrl;
-            let comPath = /^\//.test(path) ? path : ('/' + path);
-            comPath  = reverseComponentName(comPath);
-            //console.log(comPath);
-            if(comPath){
-                componentName.value = `pages${comPath}indexvue` // resolveDynamicComponent();
+            let comPath = Tools.reverseComponentName(route.meta.componentUrl);
+            getCacheView();
+            if(route.meta.leval === 2){
+                componentName.value = Nav;
+            }
+            else if(comPath){
+                componentName.value = comPath // resolveDynamicComponent();
             } else {
                 componentName.value = Error;
             }
+            
         };
         watch(() => route.path, updateComponent);
+        updateComponent();
         return {
-            componentName
+            componentName,
+            cachedTabs
         }
     },
     components: {

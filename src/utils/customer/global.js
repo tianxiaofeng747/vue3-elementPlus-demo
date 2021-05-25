@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-05-11 16:39:57
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-11 16:47:24
+ * @LastEditTime: 2021-05-25 13:44:49
  * @Description: file content
  */
 // 格式化图片
@@ -377,9 +377,17 @@ export const regexp = {
     decimals: /^\d+\.\d+$/, //  是否小数
     integer: /^\d+$/ //  正整数
 };
+export const reverseComponentName = (str= '') => {
+    if(!str) {
+        return str;
+    } else {
+        return str.replace(/(\/|\.)/g, '');
+    }
+};
 export default {
     regexp,
     getSelectValue,
+    reverseComponentName,
     downloadFile,
     encryption
 };

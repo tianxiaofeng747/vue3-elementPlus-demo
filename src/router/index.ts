@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-04-23 10:45:27
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-25 09:45:27
+ * @LastEditTime: 2021-05-25 11:14:18
  * @Description: file content
  */
 import {
@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: {template: 'index'},
                 meta: {
                     name: '首页',
-                    componentUrl: 'basic/index'
+                    componentUrl: '/basic/index'
                 }
             },
         

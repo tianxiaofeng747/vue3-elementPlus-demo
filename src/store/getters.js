@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-04-23 14:22:02
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-11 15:33:07
+ * @LastEditTime: 2021-05-25 14:09:00
  * @Description: file content
  */
 export default {
@@ -21,5 +21,6 @@ export default {
     isOpean: state => state.app.sidebar.opened, // 菜单状态
     leftMenu: state => state.app.leftMenu,
     auth: state => state.app.auth,
+    cachedViews: state => state.app.cachedViews,
     unreadCount: state => state.user.unreadCount // 未读消息数
 };

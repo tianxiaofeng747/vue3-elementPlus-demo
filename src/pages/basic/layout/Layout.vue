@@ -10,7 +10,7 @@
                 <div class="content" :class="{ close: !isOpean}">
                     <div class="main-container" ref="mainContainer">
                         <div class="main-nav">
-                            <!-- <TabsNav></TabsNav> -->
+                            <TabsNav></TabsNav>
                             <!-- <div class="main-tips">
                                 <Prompt :isShow.sync="isPageTips">
                                     <div v-html="pageTips"></div>

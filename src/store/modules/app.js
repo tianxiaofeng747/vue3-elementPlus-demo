@@ -1,10 +1,10 @@
 import axios from '@/utils/axios/index.js';
+import Tools from '@/utils/customer/global.js';
 const URL = {
     iconsList: 'ddc.uim.icon.findListForString', // icon接口
     iconUrl: 'http://at.alicdn.com/t/font_977230_hoyr74hpajn.css' // 图标列表来自于 iconfont 当前版本库
 };
 
-let reverseComponentName = (str) => str.replace(/(\/|\.)/g, '');
 const permission = {
     state: {
         sidebar: {
@@ -32,7 +32,7 @@ const permission = {
         SETTEMPNAVS: (state, item) => {
             if (item instanceof Array) {
                 state.tempNavs = item;
-                state.cachedViews = item.filter(data => data.meta.cache).map(data => reverseComponentName(data.name));
+                state.cachedViews = item.filter(data => data.meta.cache).map(data => Tools.reverseComponentName(data.name));
                 return;
             }
             let indexNo = 0,
@@ -50,7 +50,7 @@ const permission = {
                 state.tempNavs.splice(indexNo + 1, 0, { ...item });
             }
             state.activeNav = item.name;
-            let cacheName = reverseComponentName(item.name);
+            let cacheName = Tools.reverseComponentName(item.name);
             if (item.meta.cache && !state.cachedViews.includes(cacheName)) {
                 state.cachedViews.push(cacheName);
             }
@@ -75,7 +75,7 @@ const permission = {
             }
             targetName && (state.activeNav = targetName);
             state.tempNavs = tabs.filter(tab => tab.name !== closeName);
-            let cacheName = reverseComponentName(closeName);
+            let cacheName = Tools.reverseComponentName(closeName);
             for (const i of state.cachedViews) {
                 if (i === cacheName) {
                     const index = state.cachedViews.indexOf(i);
@@ -101,7 +101,7 @@ const permission = {
     },
     actions: {
         // 获取icon
-        GetIcons({ commit, state }) {
+        GetIcons ({ commit, state }) {
             return new Promise((resolve, reject) => {
                 state.iconlist.length ? resolve(state.iconlist) : axios.Http(URL.iconsList, {
                     params: {

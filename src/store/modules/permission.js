@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-05-11 15:21:03
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-24 16:24:40
+ * @LastEditTime: 2021-05-25 14:03:51
  * @Description: file content
  */
 import { routes } from '@/router/index';
@@ -16,7 +16,7 @@ const filterAsyncRouter = (routers, leval = 1) => {
     let asyncRouterMap = routers.map(item => {
         let funcUrl = (item.permissionUrl || '').split('?');
         item.path = (item.path && item.path.split('?')[0]) || 'app/404';
-        item.name = BASE.pageNames[funcUrl[0]] || (funcUrl[0] + item.no);
+        item.name = (funcUrl[0] + item.no);
         item.component = {
             template: item.name
         };

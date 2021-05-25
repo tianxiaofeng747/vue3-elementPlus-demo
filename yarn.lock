@@ -3368,6 +3368,11 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   resolved "https://registry.nlark.com/util-deprecate/download/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
+v-contextmenu@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.nlark.com/v-contextmenu/download/v-contextmenu-3.0.0.tgz#d20d3beec9cd0cb18befd231425bce7e650221e4"
+  integrity sha1-0g077snNDLGL79IxQlvOfmUCIeQ=
+
 v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.npm.taobao.org/v8-compile-cache/download/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"

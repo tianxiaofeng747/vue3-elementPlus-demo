@@ -1,9 +1,10 @@
 <template>
     <div class="tabs-nav">
-        <!-- v-contextmenu:contextmenu -->
-        <el-tabs v-model="activeName" type="card"  @tab-remove="removeTab" >
+        <el-tabs v-model="activeName" type="card"  @tab-remove="removeTab" v-contextmenu:contextmenu>
             <el-tab-pane :key="item.name" v-for="item in tempNavs" :label="item.label" :name="item.name" :closable="item.closeable">
-                <span slot="label"> <yl-icon class="tabs-tip" className="icon-chanpinzhongxin" v-if="item.meta.leval === 2"></yl-icon> {{item.label}}</span>
+                <template #label>
+                    <span> <yl-icon class="tabs-tip" className="icon-chanpinzhongxin" v-if="item.meta.leval === 2"></yl-icon> {{item.label}}</span>
+                </template>
             </el-tab-pane>
         </el-tabs>
         <v-contextmenu ref="contextmenu">
@@ -13,6 +14,8 @@
     </div>
 </template>
 <script>
+import { directive, Contextmenu, ContextmenuItem } from "v-contextmenu";
+import "v-contextmenu/dist/themes/default.css";
 import { mapGetters, mapMutations } from 'vuex';
 import BASE from '@/utils/constant/index.js';
 export default {
@@ -43,6 +46,13 @@ export default {
         $route () {
             this.addViewTags();
         }
+    },
+    directives: {
+        contextmenu: directive,
+    },
+    components: {
+        [Contextmenu.name]: Contextmenu,
+        [ContextmenuItem.name]: ContextmenuItem,
     },
     methods: {
         ...mapMutations(['SETACTIVENAV', 'REMOVENAV', 'SETTEMPNAVS']),
