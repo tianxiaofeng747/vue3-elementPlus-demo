@@ -1,9 +1,9 @@
 import Http from '@/utils/axios';
 let URL = {
     checkExpiry: 'ddc.uim.employee.checkExpiry', // 校验用户是否过期
-    MENULIST: 'ddc.uim.authorizationPermission.getEmployeeAppPermission', // 获取员工的功能权限
+    MENULIST: 'gateway-auth/auth/authMenu/menuAndPermByRoleId', // 获取菜单功能权限
     COLLECTLIST: 'ddc.uim.employeFavourFunc.getFavorPermissionList',
-    unreadMessageCount: 'ddc.message.system.countLogingUserUnReadedMessage' // 计数登录用户的未读消息
+    unreadMessageCount: 'ddc.uim.employeFavourFunc.unreadMessageCount' // 计数登录用户的未读消息
 };
 const user = {
     state: {
@@ -55,6 +55,10 @@ const user = {
         SETMESSAGECOUNT (state, count) {
             state.unreadCount = count;
         },
+        setMenuList (state, data) {
+            state.menuList = data.menuTree;
+            state.buttons = data.permissionList;
+        },
         // 更新未读消息数，默认为1（减1）
         // 每次阅读未读消息，则减1（默认）
         // 如果全部标记已读或者清空消息列表，则传count=0，unreadCount设为0
@@ -71,7 +75,7 @@ const user = {
         login (context, data) {
             return new Promise((resolve, reject) => {
                 // Http('login', data).then(
-                Http(`login?jtoken=${data.token}`, data).then(
+                Http('gateway-auth/oauth/token', data, 'PUT').then(
                     result => {
                         let userinfo = result || {};
                         if (userinfo.data) {
@@ -90,7 +94,7 @@ const user = {
         // 退出
         async logout (context, data) {
             return new Promise((resolve, reject) => {
-                Http('logout', data).then(
+                Http('gateway-auth/oauth/logout', data).then(
                     result => {
                         let data = result.data || {};
                         if (data) {
@@ -126,30 +130,17 @@ const user = {
                     );
             });
         },
-        // 获取用户菜单
         getUserMenus ({ commit, state }) {
             return new Promise((resolve, reject) => {
-                state.menuList ? resolve(state.menuList) : Http(URL.MENULIST).then(res => {
+                let params = {};
+                params.Authorization = 'bearer ' + state.userInfo.access_token;
+                params.roleId = state.userInfo.currentUser.roleId;
+                state.menuList ? resolve(state.menuList) : Http(URL.MENULIST, params).then(res => {
                     if (res.data) {
-                        // 过滤出DSRP项目的菜单
-                        let srpList = res.data.menuList;
-                        if (srpList && srpList.length) {
-                            // 菜单项有子项目则显示
-                            let munuList = srpList.filter(
-                                item => item.children && item.children.length
-                            );
-                            commit('GETROLES', munuList);
-                        } else {
-                            // Message.warning('您尚未被授权岗位无法登录，请联系管理员。');
-                        }
-                        // if (res.data.permissionList) {
-                        //     commit('SETBUTTONS', res.data.permissionList);
-                        // }
                         resolve({
-                            menuList: state.menuList,
-                            buttons: res.data.permissionList
+                            menuTree: res.data,
+                            buttons: []
                         });
-                        // commit('SETCOLLECT', collects);
                     } else {
                         reject('获取用户菜单失败');
                     }

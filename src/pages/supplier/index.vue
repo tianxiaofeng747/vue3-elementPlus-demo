@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-04-28 10:48:41
  * @LastEditors: jinqing
- * @LastEditTime: 2021-05-07 11:00:25
+ * @LastEditTime: 2021-05-07 13:33:36
  * @Description: file content
 -->
 <template>
@@ -40,6 +40,15 @@ export default defineComponent({
         };
     },
     components:{
+    },
+    mounted(){
+        setTimeout(() => {
+            this.list.push({
+                indexX: 3,
+                sourceFuncName: '99',
+                targetFuncName: '123'
+            })
+        }, 2000)
     },
     setup() {
         const renderXhao = () =>{

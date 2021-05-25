@@ -1,22 +1,25 @@
 /*
  * @Author: jinqing
- * @Date: 2020-11-05 10:02:48
+ * @Date: 2021-04-23 14:22:02
  * @LastEditors: jinqing
- * @LastEditTime: 2021-04-23 14:22:31
+ * @LastEditTime: 2021-05-11 15:33:07
  * @Description: file content
  */
 export default {
     userInfo: state => state.user.userInfo,
     token: state => state.user.userInfo && state.user.userInfo.token, // 用户token
-    enterpriseNo: state =>
-        state.user.userInfo && state.user.userInfo.enterpriseNo, // enterpriseNo
-    enterpriseName: state =>
-        state.user.userInfo && state.user.userInfo.enterpriseName, // enterpriseName
+    enterpriseNo: state => state.user.userInfo && state.user.userInfo.enterpriseNo, // enterpriseNo
+    enterpriseName: state => state.user.userInfo && state.user.userInfo.enterpriseName, // enterpriseName
     clientid: state => state.user.userInfo && state.user.userInfo.clientId, // clientid
-    enterpriseGroupType: state =>
-        state.user.userInfo && state.user.userInfo.enterpriseGroupType, // enterpriseGroupType
+    enterpriseGroupType: state => state.user.userInfo && state.user.userInfo.enterpriseGroupType, // enterpriseGroupType
     routers: state => state.permission.routers,
     menuList: state => state.user.menuList,
     buttons: state => state.user.buttons,
-    collectList: state => state.user.collectList
+    collectList: state => state.user.collectList,
+    tempNavs: state => state.app.tempNavs,
+    activeNav: state => state.app.activeNav,
+    isOpean: state => state.app.sidebar.opened, // 菜单状态
+    leftMenu: state => state.app.leftMenu,
+    auth: state => state.app.auth,
+    unreadCount: state => state.user.unreadCount // 未读消息数
 };

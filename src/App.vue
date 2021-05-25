@@ -2,44 +2,45 @@
  * @Author: jinqing
  * @Date: 2021-04-23 10:41:01
  * @LastEditors: jinqing
- * @LastEditTime: 2021-04-29 16:43:20
+ * @LastEditTime: 2021-05-12 13:36:56
  * @Description: file content
 -->
 <template>
-	<el-tabs v-model="activaPage" @tab-click="goUrl">
-		<el-tab-pane v-for="item in list" :key="item.name" :label="item.meta.label" :name="item.name">
-		</el-tab-pane>
-	</el-tabs>
-    <router-view></router-view>
+    <div id="app">
+		<router-view v-slot="{ Component }">
+			<transition>
+				<keep-alive>
+					<component :is="Component" />
+				</keep-alive>
+			</transition>
+		</router-view>
+        <!-- <transition name="router-fade" mode="out-in">
+            <router-view></router-view>
+        </transition> -->
+    </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { routes } from './router/index';
-export default defineComponent({
-    name: 'App',
-	data(){
-		return {
-			activaPage: 'Home',
-			list: [
-				...routes
-			]
-		}
-	},
-	setup: () => {
-		
-	},
-	methods:{
-		goUrl(){
-			this.$router.push({
-				name: this.activaPage
-			});
-		}
-	},
-    components: {},
-});
+<script>
+export default {
+    name: 'app'
+};
 </script>
 
-<style>
+<style lang="scss">
+@import './style/basis.scss';
+html,
+body,
+#app {
+    height: 100%;
+}
 
-</style>
+.router-fade-enter-active,
+.router-fade-leave-active {
+    transition: opacity 0.3s;
+}
+
+.router-fade-enter,
+.router-fade-leave-active {
+    opacity: 0;
+}
+</style> 

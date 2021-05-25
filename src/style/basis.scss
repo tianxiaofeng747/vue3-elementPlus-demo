@@ -489,7 +489,12 @@ $h: 12px;
         margin-left: 5px;
     }
 }
-
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
 // 下拉树高度
 section .vue-treeselect__control {
     height: 27px;

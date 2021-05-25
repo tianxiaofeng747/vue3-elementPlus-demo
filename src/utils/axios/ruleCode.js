@@ -20,35 +20,32 @@
  * code : 接口响应返回的code  Array
  * success : 接口返回是否报错 true/false
  * show:{
- *  msg: '登录过期', //错误提示消息,没有就使用后端返回
+ *  msg: '登陆过期', //错误提示消息,没有就使用后端返回
  *  href: '/login', //跳转地址
  *  clear: true  //是否要清除session缓存
  * }
  */
 const codeResponse = [{
-  code: ['SUCCESS', '0'],
-  success: true
+    code: ['SUCCESS', '0', '00000'],
+    success: true
 }, {
-  code: ['SESSION_EXPIRED', '5000'], // 登录过期
-  success: false,
-  show: {
-    msg: '登录过期',
-    href: '/login',
-    clear: true   
-  }
+    code: ['SESSION_EXPIRED', '5000'], // 登陆过期
+    success: false,
+    show: {
+        msg: '登陆过期',
+        href: '/login',
+        clear: true   
+    }
 }, {
-  code: ['FAILURE'], // excel导入检验失败code
-  success: false
+    code: ['FAILURE'], // excel导入检验失败code
+    success: false
 }, {
-  code: ['5001'], // 禁用
-  success: false,
-  show: {
-    href: '/logout',
-    clear: true   
-  }
-}, {
-  code: ['6666'], 
-  success: false
+    code: ['5001'], // 禁用
+    success: false,
+    show: {
+        href: '/login',
+        clear: true   
+    }
 }];
-
+  
 export default codeResponse;

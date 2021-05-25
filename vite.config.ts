@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-04-23 10:41:01
  * @LastEditors: jinqing
- * @LastEditTime: 2021-04-28 14:58:35
+ * @LastEditTime: 2021-05-25 08:26:00
  * @Description: file content
  */
 import { defineConfig } from 'vite';
@@ -14,6 +14,7 @@ export default defineConfig({
     plugins: [vueJsx({}), vue()],
     resolve: {
         alias: {
+            'vue': 'vue/dist/vue.esm-bundler.js', // 定义vue的别名，如果使用其他的插件，可能会用到别名
             '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
         }
     },
@@ -24,8 +25,18 @@ export default defineConfig({
         // 设置代理，根据我们项目实际情况配置
         proxy: {
             '/gateway': {
-                target: 'http://srp.dev.cloudyigou.com',
+                target: 'http://dhrp.dev.cloudyigou.com',
                 changeOrigin: true
+            }
+        }
+    },
+    optimizeDeps: {
+        include: ['lodash']
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: '@import "@/style/common.scss";'
             }
         }
     }

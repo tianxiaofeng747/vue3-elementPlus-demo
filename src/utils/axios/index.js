@@ -2,7 +2,7 @@
  * @Author: jinqing
  * @Date: 2021-04-23 10:50:42
  * @LastEditors: jinqing
- * @LastEditTime: 2021-04-23 11:06:48
+ * @LastEditTime: 2021-05-11 17:23:43
  * @Description: file content
  */
 /**
@@ -19,7 +19,8 @@ new Interceptor(myAxios, TimeOut); // eslint-disable-line no-new
 const configuration = [
     'version', // 版本
     'ignoreRepeat', // 忽略防止重复请求
-    'verifycode' // 验证码
+    'verifycode', // 验证码
+    'Authorization' // 客户端base64加密
 ];
 /**
  * 基础配置

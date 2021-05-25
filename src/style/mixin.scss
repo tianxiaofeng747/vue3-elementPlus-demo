@@ -1,0 +1,55 @@
+@import './variable.scss';
+@mixin colorbody {
+    height: 100%;
+    width: 100%;
+    // 修改这里可能影响登录页
+    overflow-y: auto;
+    overflow-x: hidden;
+    //min-width: 1366px;
+    background-color: $body-bg;
+}
+
+@mixin clearfix {
+    zoom: 1;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin flex($justify:center, $align:center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin scrollBar {
+    &::-webkit-scrollbar-track-piece {
+        background: #d3dce6;
+    }
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #99a9bf;
+        border-radius: 20px;
+    }
+}
+
+@mixin relative {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+@function color($key) {
+    @return map-get( $info, $key)
+}
